@@ -143,87 +143,40 @@ This table contains a single String column called ‘name’ – the name of a d
 Each database that the server knows about has a corresponding entry in the table.
 This system table is used for implementing the `SHOW DATABASES` query.
 
-## system.data\_type-families {#system_tables-data_type_families}
+## system.data_type-families {#system_tables-data_type_families}
 
-Contains information about properties of SQL data types.
+Contains information about supported ([data types](../sql-reference/data-types/)).
 
 Columns:
 
 -   `name` ([String](../sql-reference/data-types/string.md)) — Data type name.
--   `case_insensitive` ([UInt8](../sql-reference/data-types/int-uint.md)) — Shows whether a data type is case sensetive.
--   `alias_to` ([String](../sql-reference/data-types/string.md)) — Equivalents to data types of C.
+-   `case_insensitive` ([UInt8](../sql-reference/data-types/int-uint.md)) — Property that shows whether you can use a data type name in a query in case insensitive manner or not. For example, `Date` and `date` are both valid.
+-   `alias_to` ([String](../sql-reference/data-types/string.md)) — Data type name for which `name` is an alias.
 
 **Example**
 
 ``` sql
-SELECT * FROM system.data_type_families 
+SELECT * FROM system.data_type_families WHERE alias_to = 'String'
 ```
 
 ``` text
-┌─name────────────────────┬─case_insensitive─┬─alias_to────┐
-│ IPv6                    │                0 │             │
-│ IPv4                    │                0 │             │
-│ IntervalYear            │                0 │             │
-│ IntervalQuarter         │                0 │             │
-│ IntervalMonth           │                0 │             │
-│ IntervalDay             │                0 │             │
-│ IntervalHour            │                0 │             │
-│ IntervalSecond          │                0 │             │
-│ AggregateFunction       │                0 │             │
-│ Nothing                 │                0 │             │
-│ Tuple                   │                0 │             │
-│ Array                   │                0 │             │
-│ Nullable                │                0 │             │
-│ Int32                   │                0 │             │
-│ Date                    │                1 │             │
-│ Enum                    │                0 │             │
-│ Enum8                   │                0 │             │
-│ IntervalMinute          │                0 │             │
-│ FixedString             │                0 │             │
-│ LowCardinality          │                0 │             │
-│ String                  │                0 │             │
-│ DateTime                │                1 │             │
-│ UUID                    │                0 │             │
-│ Decimal64               │                1 │             │
-│ Decimal32               │                1 │             │
-│ Float64                 │                0 │             │
-│ Int16                   │                0 │             │
-│ DateTime64              │                1 │             │
-│ Decimal128              │                1 │             │
-│ Int8                    │                0 │             │
-│ SimpleAggregateFunction │                0 │             │
-│ Nested                  │                0 │             │
-│ Int64                   │                0 │             │
-│ Decimal                 │                1 │             │
-│ IntervalWeek            │                0 │             │
-│ UInt64                  │                0 │             │
-│ Enum16                  │                0 │             │
-│ UInt32                  │                0 │             │
-│ UInt16                  │                0 │             │
-│ Float32                 │                0 │             │
-│ UInt8                   │                0 │             │
-│ BINARY                  │                1 │ FixedString │
-│ LONGBLOB                │                1 │ String      │
-│ LONGTEXT                │                1 │ String      │
-│ TINYTEXT                │                1 │ String      │
-│ TEXT                    │                1 │ String      │
-│ TINYINT                 │                1 │ Int8        │
-│ DEC                     │                1 │ Decimal     │
-│ VARCHAR                 │                1 │ String      │
-│ MEDIUMBLOB              │                1 │ String      │
-│ TIMESTAMP               │                1 │ DateTime    │
-│ BLOB                    │                1 │ String      │
-│ FLOAT                   │                1 │ Float32     │
-│ INTEGER                 │                1 │ Int32       │
-│ DOUBLE                  │                1 │ Float64     │
-│ BIGINT                  │                1 │ Int64       │
-│ TINYBLOB                │                1 │ String      │
-│ CHAR                    │                1 │ String      │
-│ MEDIUMTEXT              │                1 │ String      │
-│ INT                     │                1 │ Int32       │
-│ SMALLINT                │                1 │ Int16       │
-└─────────────────────────┴──────────────────┴─────────────┘
+┌─name───────┬─case_insensitive─┬─alias_to─┐
+│ LONGBLOB   │                1 │ String   │
+│ LONGTEXT   │                1 │ String   │
+│ TINYTEXT   │                1 │ String   │
+│ TEXT       │                1 │ String   │
+│ VARCHAR    │                1 │ String   │
+│ MEDIUMBLOB │                1 │ String   │
+│ BLOB       │                1 │ String   │
+│ TINYBLOB   │                1 │ String   │
+│ CHAR       │                1 │ String   │
+│ MEDIUMTEXT │                1 │ String   │
+└────────────┴──────────────────┴──────────┘
 ```
+
+**See Also**
+
+-   [Syntax](../sql-reference/syntax.md) — Information about supported syntax.
 
 ## system.detached\_parts {#system_tables-detached_parts}
 
